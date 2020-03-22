@@ -16,7 +16,7 @@ typedef struct nod
 }nodo;
 
 nodo *crearNodo(alumno informacion) {
-    nodo *nuevoNodo = (nodo*) malloc(sizeof(nodo));
+    nodo *nuevoNodo = malloc(sizeof(nodo));
     nuevoNodo->info = informacion;
     nuevoNodo -> sgte =NULL;
     return nuevoNodo;
