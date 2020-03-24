@@ -12,11 +12,11 @@ void leerArchivo(FILE *archivo, char* nombreArchivo){   //Lee lineas enteras
             printf("%s \n", temporal);
             terminado = fscanf(archivo," %[^\n]",&temporal);
         }
+        fclose(archivo);
     }
     else{
         printf("No se pudo abrir el archivo \n");
     }
-    fclose(archivo);
 }
 
 void leerArchivoPorCaracter(FILE* archivo, char* nombreArchivo) {  //Lee caracter por caracter
@@ -40,24 +40,56 @@ void leerArchivoPorLinea(FILE* archivo, char* nombreArchivo) {  //Lee lineas de 
             fgets(caracteres,101,archivo);
             printf("%s",caracteres);
         }
+        fclose(archivo);
     }
-    fclose(archivo);
 }
 
 void agregarLineaEnArchivo(FILE* archivo, char* nombreArchivo, char* textoAIngresar){  //Agrega una linea (un char*). Crea el archivo si no existe
     if(archivo = fopen(nombreArchivo , "a")){
         fprintf(archivo,"%s \n",textoAIngresar);
+        fclose(archivo);
     }
     else{
         printf("No se pudo escribir en el archivo \n");
     }
-    fclose(archivo);
+}
+
+int cantidadLineasArchivo(FILE* archivo, char* nombreArchivo){
+    char caracteres[100];
+    int contador = 0;
+    if(archivo = fopen(nombreArchivo,"r")){
+        while(!feof(archivo)){
+            fgets(caracteres,101,archivo);
+            contador++;
+        }
+        return contador;
+        fclose(archivo);
+    }
+}
+
+void leerUnaLinea(FILE* archivo, char* nombreArchivo, int posicionLinea){     //Lee el contenido de una determinada linea, su posicion se envia como parametro
+    char auxiliar[100];
+    if(archivo = fopen(nombreArchivo,"r")){
+        if(posicionLinea <= cantidadLineasArchivo(archivo,nombreArchivo)){
+            for(int i = 0; i < posicionLinea; i++){
+                fgets(auxiliar,100,archivo);
+            }
+            printf("%s \n",auxiliar);
+        }
+        else{
+            printf("La linea %i no existe",posicionLinea);
+        }
+        fclose(archivo);
+    }
 }
 
 int main()
 {
     FILE *archivo;
     char* nombreArchivo = "prueba.txt";
-    agregarLineaEnArchivo(archivo,nombreArchivo,"Ingrese texto aqui");
-    leerArchivo(archivo,nombreArchivo);
+    //agregarLineaEnArchivo(archivo,nombreArchivo,"Ingrese texto aqui");
+    //leerArchivo(archivo,nombreArchivo);
+    int cantidad = cantidadLineasArchivo(archivo,nombreArchivo);
+    printf("El archivo tiene %i lineas \n",cantidad);
+    //leerUnaLinea(archivo,nombreArchivo,7);
 }
