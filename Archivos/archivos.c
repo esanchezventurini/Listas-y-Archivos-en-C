@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-
+#include "archivos.h"
 
 void leerArchivo(FILE *archivo, char* nombreArchivo){   //Lee lineas enteras
     char temporal[100];
@@ -83,6 +82,7 @@ void leerUnaLinea(FILE* archivo, char* nombreArchivo, int posicionLinea){     //
     }
 }
 
+/*
 int main()
 {
     FILE *archivo;
@@ -93,3 +93,4 @@ int main()
     printf("El archivo tiene %i lineas \n",cantidad);
     //leerUnaLinea(archivo,nombreArchivo,7);
 }
+*/
